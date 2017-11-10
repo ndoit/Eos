@@ -1,5 +1,5 @@
 - name: Install Git
-  sudo: true
+  become: true
   yum:
     name: git
     state: latest
@@ -7,17 +7,17 @@
 - name: install developer tools
   sudo: true
   include: yum_development_tools.yml
-# - name: Install Oracle Instant Client for ruby oci8 gem for Banner
-#   sudo: true
-#   include: oracle_instant_client.yml
-# - name: install free-tds requirement
-#   sudo: true
-#   yum:
-#     name: freetds
-#     state: latest
-#   yum:
-#     name: freetds-devel
-#     state: latest
+- name: Install Oracle Instant Client for ruby oci8 gem for Banner
+  become: true
+  include: oracle_instant_client.yml
+- name: install free-tds requirement
+  become: true
+  yum:
+    name: freetds
+    state: latest
+  yum:
+    name: freetds-devel
+    state: latest
 # Configure Github
 - name: add color to git output
   command: git config --global color.ui true
