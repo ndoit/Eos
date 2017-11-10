@@ -26,5 +26,5 @@
       rvm1_user: 'vagrant'
       tags: ruby
   tasks:
-  - name: install git and checkout fenrir master branch
-    include: checkout_fenrir.yml
+  - name: install git and checkout eforms master branch
+    include: checkout_eforms.yml

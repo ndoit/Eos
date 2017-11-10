@@ -45,7 +45,9 @@
   file:
     path: /vagrant/eforms
     state: directory
-- git:
+- name: Ensure repo exists on box
+  git:
     repo: git@bitbucket.org:notredameregistrar/eforms.git
     dest: /vagrant/eforms
     accept_hostkey: true
+    update: no
