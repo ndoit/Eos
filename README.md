@@ -152,5 +152,5 @@ vagrant init centos/7; vagrant up --provider virtualbox
 You're Done!
 ---
 
-Once you have the environment setup, make sure you restart the box and you
-should be able to write awesome code!
+Once you have the environment setup, make sure you restart the box
+`vagrant reload` and you're on your way to writing awesome code!
