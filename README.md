@@ -1,11 +1,8 @@
-Nibelheim
+Eos
 ===
 
 This is a dedicated vagrant script that creates a virtual development
-environment for [fenrir](https://github.com/ndoit/fenrir). It is intended to be
-a replacement for deprecated [Midgar](https://github.com/ndoit/midgar).
-Where Midgar was only a self contained and static box, this project is a fully
-fleshed and customized Ansible script. The purpose is 2 fold:
+environment. The purpose is 2 fold:
 
 1. To allow the coolest devs to experiment [freely without fear](http://bit.ly/2q2SIjN).
 If they make a mistake, they can blow the vagrant box away and start over.
@@ -18,18 +15,22 @@ It looks daunting now, but you only have to run this setup once. Then the ansibl
 script takes care of everything every `vagrant destroy && vagrant up` deploy
 thereafter.
 
-There are several steps needed before running `vagrant up`. 
+There are several steps needed before running `vagrant up`.
 
 - Install Vagrant
 - Install VirtualBox
-- Install Xcode
-- Install Pip
-- Install Ansible
-- Install rvm Ansible community role
 - Have a plan for virtual box guest additions
 - Install github *with credentials* on your mac
-- Ability to SSH to github from your Mac
-- Install the official centos 6 box and startup
+- Ability to SSH to Github from your Mac
+
+If you have all these installed, then here is the next step:
+```
+git clone git@github.com:ndoit/Eos.git
+cd Eos
+vagrant up
+```
+
+---
 
 Install Vagrant
 ---
@@ -41,59 +42,6 @@ Virtual Box Install
 ---
 Go to the virtual box [downloads section](https://www.virtualbox.org/wiki/Downloads)
 and select the download for your host machine. Follow the instructions.
-
-Install Xcode
----
-Xcode will seem unnecessary, unfortunately there is no good standalone C
-compiler available to Mac.  Go to the app store on Mac and search for Xcode.
-It should be the top result. Download and install, and agree to the license.
-
-Go to the terminal when finished installing and make sure you have gcc
-installed. That's actually all you need from xcode.
-```
-gcc -v
-```
-
-Install Pip
----
-Pip is needed to do the easy install of Ansible. Should just be the command
-below.
-
-```
-sudo easy_install pip
-```
-
-Ansible install
----
-
-The install notes [for mac](http://docs.ansible.com/ansible/intro_installation.html#latest-releases-on-mac-osx)
-say to use pip to install. At least version 2.2 for the
-community role in the next step.
-
-If you have pip installed you can just run
-```
-sudo pip install ansible
-```
-
-If you have problems for this step for upgrading, there is a known issue
-with mac osx security settings not letting Ansible update to latest 2.2 version.
-[See here](https://github.com/ansible/ansible/issues/13116#issuecomment-239844113)
-
-The command that I have seen work when upgrading is
-```
-sudo pip install --ignore-installed --upgrade ansible
-```
-
-RVM Ansible Community Role Install
----
-
-Next you will need to install an Ansible community role for rvm
-[rvm_io.ruby](https://galaxy.ansible.com/rvm_io/ruby/) which will
-handle our ruby installs and rvm install.
-
-```
-sudo ansible-galaxy install rvm_io.ruby
-```
 
 Virtual Box Guest Additions
 ---
@@ -114,7 +62,7 @@ vagrant plugin install vagrant-vbguest
 
 The other way is to do it manually. The versions in this doc is 5.1.22, it must
 match your virtualbox version. Consequently, every time you upgrade virtualbox,
-you must also upgrade the guest additions.
+you must also upgrade the guest additions. These code blocks are for macs
 ```
 # Remember the guest additions must be installed on your guest machine.
 wget http://download.virtualbox.org/virtualbox/5.1.22/VBoxGuestAdditions_5.1.22.iso
@@ -193,15 +141,12 @@ If it does not and gives you `PermissionDenied Public Key` errors, checkout this
 [walkthrough](https://github.com/ndoit/midgar/blob/master/PermissionDeniedPublicKey.md)
 on fixing it.
 
-Install Centos 6 Box and vagrant up
+Install Centos 7 Box and vagrant up
 ---
-
-Make sure when you cd into Nibelheim folder that you use the
-[official box](https://atlas.hashicorp.com/centos/boxes/6) from Centos.
 
 It should be this simple command and this starts up the box.
 ```
-vagrant init centos/6; vagrant up --provider virtualbox
+vagrant init centos/7; vagrant up --provider virtualbox
 ```
 
 Post Vagrant Up
