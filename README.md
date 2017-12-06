@@ -108,13 +108,14 @@ Output:
 version: 4.1.20
 ```
 
-GITHUB MUST BE INSTALLED ON YOUR HOST MACHINE
+GIT MUST BE INSTALLED ON YOUR HOST MACHINE
 ---
 The Ansible script looks at your credentials on your host machine to streamline
-the github install and prevent a common commit mistake.
+the git install and prevent a common commit mistake.
 
-Check if you have your credentials set properly. These will be your github
-profile. Remember, the script uses this so these commands have to return a value
+Check if you have your credentials set properly. These will be your
+github/bitbucket profile. Remember, the script uses this so these commands have
+to return a value
 ```
 # on host machine
 git config --global user.name
@@ -139,7 +140,7 @@ Hi RyanSnodgrass! You've successfully authenticated, but GitHub does not provide
 
 If it does not and gives you `PermissionDenied Public Key` errors, checkout this
 [walkthrough](https://github.com/ndoit/midgar/blob/master/PermissionDeniedPublicKey.md)
-on fixing it.
+on fixing it. Note, this is for macs
 
 Install Centos 7 Box and vagrant up
 ---
