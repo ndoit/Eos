@@ -77,7 +77,7 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision :ansible do |ansible|
+  config.vm.provision :ansible_local do |ansible|
     # vagrant's guiding principle is simplicity. one command `vagrant up` and
     # have everything done. Therefore, there is currently no way to get user
     # input. This is important for git user name and email. On a new box git
@@ -87,6 +87,7 @@ Vagrant.configure(2) do |config|
     # those.
     name = `git config --global user.name`.chomp
     email = `git config --global user.email`.chomp
+    ansible.galaxy_role_file = 'requirements.yml'
     ansible.playbook = 'playbook.yml'
     ansible.extra_vars = { git_user_name: name, git_email: email }
     ansible.ask_vault_pass = true
