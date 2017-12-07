@@ -3,28 +3,28 @@
   yum:
     name: git
     state: latest
-# Install needed packages for fenrir. Most involve database connections
-- name: install developer tools
-  sudo: true
-  include: yum_development_tools.yml
-- name: Install Oracle Instant Client for ruby oci8 gem for Banner
-  become: true
-  include: oracle_instant_client.yml
-- name: install free-tds requirement
-  become: true
-  yum:
-    name: freetds
-    state: latest
-  yum:
-    name: freetds-devel
-    state: latest
-# Configure Github
+
+# Install needed packages involving database connections
+# - name: Install Oracle Instant Client for ruby oci8 gem for Banner
+#   become: true
+#   include: oracle_instant_client.yml
+# - name: install free-tds requirement
+#   become: true
+#   yum:
+#     name: freetds
+#     state: latest
+#   yum:
+#     name: freetds-devel
+#     state: latest
+
+# Configure Git
 - name: add color to git output
   command: git config --global color.ui true
 - name: add github username
   command: git config --global user.name {{git_user_name}}
 - name: add github email
   command: git config --global user.email {{git_email}}
+
 # install extra global gems
 - name: install extra global gems
   command: rvm @global do gem install {{item}}
@@ -34,20 +34,22 @@
     - brakeman
     - haml_lint
     - flog
+
 # install npm
 - name: install npm
   become: true
   yum:
     name: npm
     state: latest
-# Create and clone fenrir
-- name: create directory to house eforms
-  file:
-    path: /vagrant/eforms
-    state: directory
-- name: Ensure repo exists on box
-  git:
-    repo: git@bitbucket.org:notredameregistrar/eforms.git
-    dest: /vagrant/eforms
-    accept_hostkey: true
-    update: no
+
+# Create housing directory and clone Application
+# - name: create directory to house application
+#   file:
+#     path: /vagrant/YOUR_APPLICATION_NAME
+#     state: directory
+# - name: Ensure repo exists on box
+#   git:
+#     repo: git@bitbucket.org:notredameregistrar/eforms.git
+#     dest: /vagrant/YOUR_APPLICATION_NAME
+#     accept_hostkey: true
+#     update: no
