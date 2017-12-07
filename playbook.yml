@@ -27,4 +27,4 @@
       tags: ruby
   tasks:
   - name: install git and checkout eforms master branch
-    include: checkout_eforms.yml
+    include: checkout_application.yml
