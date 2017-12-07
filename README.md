@@ -151,7 +151,51 @@ vagrant init centos/7; vagrant up --provider virtualbox
 ```
 
 You're Done!
----
+===
 
 Once you have the environment setup, make sure you restart the box
 `vagrant reload` and you're on your way to writing awesome code!
+
+### Shared Folder
+
+One key point that might get missed is the location inside the vagrant box of
+the shared folder. This folder by default is `/vagrant`. What can be confusing
+is there are 2 folders named "vagrant" - `/vagrant` and `/home/vagrant`. Even
+more potentially confusing is when you SSH into the box, it starts you in the
+home `~` directory, which is `/home/vagrant`. I never use this folder, and
+always operate out of `/vagrant` because that is where the shared folder and my
+codebases are.
+
+### What are all these extra Ansible tasks?
+
+I've already figured out how to install a couple things for my own applications.
+Things like Redis, Elasticsearch, Nginx, Oracle Connections. These task lists
+have been removed from the base setup as I wanted to keep this as straight
+forward as possible, but should be very easy to add back in.
+
+### But, My App Needs a Ton of Extra Process and Databases
+
+Then install them! Unfortunately, you're going to have to figure out how to do
+that **AND** add it to the Ansible tasks. Remember, this is a reproducible
+script that installs your entire application infrastructure from scratch. So if
+you install your database manually, it will not be there the next time you
+`vagrant destroy && vagrant up`. The best method I've found is to figure out how
+to install it manually on the vagrant instance, THEN figure out how to get
+Ansible to do it.
+
+### What Do I Do Next?
+
+That depends. Are you working on an existing application or starting a new one?
+
+If you're starting a new Rails application you will need to install Rails.
+`gem install rails` will install the latest and greatest stable version of Ruby
+on Rails. Remember to always work code in the shared folder `/vagrant` so run
+`cd /vagrant`. Then `rails new my_super_awesome_app` to create a Rails
+project named "my_super_awesome_app" in the shared folder that you can also edit
+from your host machine on your favorite text editor!
+
+If you are working on an existing application, you won't need to install Rails
+as your Gemfile will already specify it and bundler will install it for you.
+What you will need to do is clone your repo from Github/Bitbucket onto the
+shared folder `/vagrant`. Then
+`git clone git@github.com/ndoit/my_existing_app.git`.
