@@ -6,7 +6,7 @@
       include: yum_development_tools.yml
 - hosts: all
   vars:
-    ruby_version: 2.4.2
+    ruby_version: 2.3.4
   roles:
     - role: rvm_io.ruby
       rvm1_rubies:
